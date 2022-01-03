@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>11</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>99</x>
+      <y>198</y>
+      <w>561</w>
+      <h>396</h>
+    </coordinates>
+    <panel_attributes>pianoDiStudio::GestioneEsami
+--
++pianoDiStudio = FXCollections.observableArrayList(): ObservableList&lt;Esame&gt;
+-popupStage: Stage
+-popupController: ModificaEsamiController
+-FILE = "Esami.txt": String
+-hasChanged = false: boolean
+-isLegit = false: boolean
+--
++GestioneEsami(): ctor
++main(String[] args): void
++start(Stage StagePrimario): void
+-login(): boolean
+-closeWindowEvent(WindowEvent event): void
++mostraPopupModifica(Esame esame): void
++getEsami(): ObservableList&lt;Esame&gt;
++aggiungiEsame(Esame prova): void
++salvaPianoDiStudio(): void
++caricaPianoDiStudio(): void
++rimuoviEsame(Esame prova): void
++modificaEsame(Esame esameAggiornato): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>671</x>
+      <y>198</y>
+      <w>440</w>
+      <h>363</h>
+    </coordinates>
+    <panel_attributes>pianoDiStudio::Esame
+--
+-id: int
+-materia: StringProperty
+-crediti: IntegerProperty
+-docente: StringProperty
+--
++Esame(int id, String materia, int crediti, String docente): ctor
++Esame(Esame esame): ctor
++getId(): int
++getMateria(): String
++materiaProperty(): StringProperty
++setMateria(String materia): void
++getCrediti(): int
++creditiProperty(): IntegerProperty
++setCrediti(int crediti): void
++getDocente(): String
++docenteProperty(): StringProperty
++setDocente(String docente): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>99</x>
+      <y>605</y>
+      <w>341</w>
+      <h>253</h>
+    </coordinates>
+    <panel_attributes>pianoDiStudio::ProgressDialog
+--
+-vbox: VBox
+-label: Label
+-progressBar: ProgressBar
+-isFinished = false: boolean
+--
++ProgressDialog(): ctor
++ProgressDialog(double progress): ctor
++ProgressDialog(final Worker&lt;?&gt; worker): ctor
++setProgress(double progress): void
+-createContentLabel(String text): Label
+-updateGrid(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>451</x>
+      <y>605</y>
+      <w>473</w>
+      <h>231</h>
+    </coordinates>
+    <panel_attributes>pianoDiStudio::ModificaEsamiController
+--
++messaggioValidazione: Label
+-esame: Esame
+-campoMateria: TextField
+-campoCrediti: TextField
+-campoDocente: TextField
+--
++start(): void
++handleSalvaModifiche(MouseEvent mouseEvent): void
+-validaForm(String materia, String crediti, String docente): boolean
++setEsame(Esame esame): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>660</x>
+      <y>33</y>
+      <w>330</w>
+      <h>154</h>
+    </coordinates>
+    <panel_attributes>pianoDiStudio::ExceptionDialog
+--
+-errorMessage: String
+--
+~ExceptionDialog(String errorMessage): ctor
+-showAlert(): void
++getErrorMessage(): String
+-setErrorMessage(String errorMessage): void
+-
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>935</x>
+      <y>572</y>
+      <w>495</w>
+      <h>352</h>
+    </coordinates>
+    <panel_attributes>pianoDiStudio::TabellaEsamiController
+--
+-esamiChartLine: BarChart
+-LblMessaggioSalva: Label
+-colonnaMateria: TableView&lt;Esame&gt;
+-colonnaCrediti: TableColumn&lt;Esame, String&gt;
+-colonnaDocente: TableColumn&lt;Esame, String&gt;
+-campoMateria: TextField
+-campoCrediti: TextField
+-campoDocente: TextField
+-LblMessaggioNuovoEsame : Label
+--
+-initialize(): void
++handleNuovoEsame(MouseEvent mouseEvent): void
++gestioneEsamiChartLine(): void
++handleSalvaPianoDiStudio(MouseEvent mouseEvent): void
++handleModificaEsame(MouseEvent mouseEvent): void
++handleEliminaEsame(MouseEvent mouseEvent): void
+-validaForm(String materia, String crediti, String docente): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
