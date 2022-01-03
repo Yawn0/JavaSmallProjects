@@ -1,0 +1,44 @@
+@startuml
+
+  namespace viaggio {
+    class viaggio.Nodo {
+
+    }
+  }
+  
+
+  namespace viaggio {
+    class viaggio.TestaViaggio {
+    }
+  }
+  
+
+  namespace viaggio {
+    class viaggio.Viaggiatore {
+    }
+  }
+  
+
+  namespace viaggio {
+    class viaggio.Viaggio {
+    }
+  }
+  
+
+  namespace viaggio {
+    class viaggio.ViaggioException {
+    }
+  }
+  
+
+  viaggio.Nodo o-- viaggio.Viaggiatore : info
+  viaggio.Nodo o-- viaggio.Nodo : nodo
+  viaggio.Viaggio o-- viaggio.Nodo : head
+
+
+right footer
+
+
+endfooter
+
+@enduml

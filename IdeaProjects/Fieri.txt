@@ -1,0 +1,5 @@
+1 ; Sergio  ; 23 ; centrale ; true
+2 ; Arturo  ; 11 ; palleggiatore ; true
+3 ; Maestro ; 34 ; Banda ; true
+4 ; Ciccio  ; 33 ; libero ; false
+5 ; Sberlo  ; 55 ; opposto ; false

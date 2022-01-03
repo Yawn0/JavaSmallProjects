@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>15</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>270</x>
+      <y>135</y>
+      <w>570</w>
+      <h>375</h>
+    </coordinates>
+    <panel_attributes>viaggio::Viaggiatore
+--
+-codice: int
+-nome: String
+-telefono: String
+--
++Viaggiatore(String nome, int codice, String telefono): ctor
++Viaggiatore(Viaggiatore viaggiatore): ctor
++setNome(String nome): void
++setCodice(int codice): void
++getNome(): String
++setTelefono(String telefono): void
++getCodice(): int
++getTelefono(): String
++toString(): String
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>855</x>
+      <y>135</y>
+      <w>435</w>
+      <h>390</h>
+    </coordinates>
+    <panel_attributes>viaggio::Viaggio
+--
+-head: Nodo
+-elementi: int
+--
++Viaggio(): ctor
+-getLinkPosizione(int posizione): Nodo
+-getLinkPosizione(): Nodo
++inserisciInTesta(Viaggiatore persona): void
++prenotazione(Viaggiatore persona): void
+-eliminaInTesta(): void
++eliminaPrenotazione(int posizione): void
+-visita(Nodo p): String
++elenco(): String
++toString(): String
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>270</x>
+      <y>540</y>
+      <w>345</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>viaggio::Nodo
+--
+-info: Viaggiatore
+-nodo: Nodo
+--
++Nodo(Viaggiatore persona): ctor
++setInfo(Viaggiatore persona): void
++getInfo(): Viaggiatore
+#setNodo(Nodo nodo): void
++getNodo(): Nodo
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>915</x>
+      <y>630</y>
+      <w>375</w>
+      <h>165</h>
+    </coordinates>
+    <panel_attributes>viaggio::ViaggioException
+--
+-error: String
+--
+~ViaggioException(String error): ctor
+~getError(): String
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

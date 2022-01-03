@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/1-Punto/1-Punto.iml" filepath="$PROJECT_DIR$/1-Punto/1-Punto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/10-Portachiavì/10-Portachiavì.iml" filepath="$PROJECT_DIR$/10-Portachiavì/10-Portachiavì.iml" />
+      <module fileurl="file://$PROJECT_DIR$/11--Mensola V2/11--Mensola V2.iml" filepath="$PROJECT_DIR$/11--Mensola V2/11--Mensola V2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/11-Mensola V2/11-Mensola V2.iml" filepath="$PROJECT_DIR$/11-Mensola V2/11-Mensola V2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/12-Viaggio/12-Viaggio.iml" filepath="$PROJECT_DIR$/12-Viaggio/12-Viaggio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/13 - Piano Di Studio/13 - Piano Di Studio.iml" filepath="$PROJECT_DIR$/13 - Piano Di Studio/13 - Piano Di Studio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/14 - Alberi/14 - Alberi.iml" filepath="$PROJECT_DIR$/14 - Alberi/14 - Alberi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/15 - ArithmeticExc/15 - ArithmeticExc.iml" filepath="$PROJECT_DIR$/15 - ArithmeticExc/15 - ArithmeticExc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/16 - Prova-Grafica/16 - Prova-Grafica.iml" filepath="$PROJECT_DIR$/16 - Prova-Grafica/16 - Prova-Grafica.iml" />
+      <module fileurl="file://$PROJECT_DIR$/17 - ChatWithSockets/17 - ChatWithSockets.iml" filepath="$PROJECT_DIR$/17 - ChatWithSockets/17 - ChatWithSockets.iml" />
+      <module fileurl="file://$PROJECT_DIR$/18 - Aste/18 - Aste.iml" filepath="$PROJECT_DIR$/18 - Aste/18 - Aste.iml" />
+      <module fileurl="file://$PROJECT_DIR$/19 - Raccolta dati/19 - Raccolta dati.iml" filepath="$PROJECT_DIR$/19 - Raccolta dati/19 - Raccolta dati.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2-Rettangolo/2-Rettangolo1.iml" filepath="$PROJECT_DIR$/2-Rettangolo/2-Rettangolo1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/20 - CompraVendita/20 - CompraVendita.iml" filepath="$PROJECT_DIR$/20 - CompraVendita/20 - CompraVendita.iml" />
+      <module fileurl="file://$PROJECT_DIR$/3-Dipendente/3-Dipendente.iml" filepath="$PROJECT_DIR$/3-Dipendente/3-Dipendente.iml" />
+      <module fileurl="file://$PROJECT_DIR$/4-Geometria/4-Geometria.iml" filepath="$PROJECT_DIR$/4-Geometria/4-Geometria.iml" />
+      <module fileurl="file://$PROJECT_DIR$/5-Cellulare/5-Cellulare.iml" filepath="$PROJECT_DIR$/5-Cellulare/5-Cellulare.iml" />
+      <module fileurl="file://$PROJECT_DIR$/6-TEST-Bicicletta/6-TEST-Bicicletta.iml" filepath="$PROJECT_DIR$/6-TEST-Bicicletta/6-TEST-Bicicletta.iml" />
+      <module fileurl="file://$PROJECT_DIR$/7-formula1/7-formula1.iml" filepath="$PROJECT_DIR$/7-formula1/7-formula1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/8-Lampadina/8-Lampadina.iml" filepath="$PROJECT_DIR$/8-Lampadina/8-Lampadina.iml" />
+      <module fileurl="file://$PROJECT_DIR$/9-Pallavolo/9-Pallavolo.iml" filepath="$PROJECT_DIR$/9-Pallavolo/9-Pallavolo.iml" />
+    </modules>
+  </component>
+</project>

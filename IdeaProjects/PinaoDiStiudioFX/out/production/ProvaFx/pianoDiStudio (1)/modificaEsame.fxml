@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="250" prefWidth="300" spacing="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pianoDiStudio.ModificaEsamiController">
+    <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
+    <children>
+
+        <GridPane hgap="10" vgap="10">
+
+            <children>
+                <Label text="Materia:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="campoMateria" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label text="Crediti:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="campoCrediti" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label text="Docente:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="campoDocente" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            </children>
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
+
+        <Button onMousePressed="#handleSalvaModifiche" text="Salva modifiche" />
+        <Label fx:id="messaggioValidazione" prefHeight="17.0" prefWidth="260.0" textAlignment="CENTER" />
+    </children>
+</VBox>

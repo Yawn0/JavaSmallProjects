@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="657.0" prefWidth="936.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pianoDiStudio.TabellaEsamiController">
+    <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
+    <children>
+        <VBox alignment="TOP_RIGHT" prefHeight="604.0" prefWidth="750.0" spacing="15">
+            <children>
+            <TabPane prefHeight="543.0" prefWidth="750.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab fx:id="tabEsami" closable="false" text="Tabella esami">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="543.0" prefWidth="886.0">
+                           <children>
+                                  <TableView fx:id="tabellaEsami" cache="true" editable="true" maxWidth="-Infinity" prefHeight="378.0" prefWidth="886.0">
+                                      <columns>
+                                          <TableColumn fx:id="colonnaMateria" text="Materia" />
+                                          <TableColumn fx:id="colonnaCrediti" text="Crediti" />
+                                          <TableColumn fx:id="colonnaDocente" text="Docente" />
+                                      </columns>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                  </TableView>
+                              <HBox alignment="TOP_RIGHT" layoutX="130.0" layoutY="418.0" prefHeight="108.0" prefWidth="742.0">
+                                 <children>
+                                        <HBox prefHeight="81.0" prefWidth="358.0">
+                                       <children>
+                                          <VBox alignment="TOP_RIGHT" prefHeight="84.0" prefWidth="326.0">
+                                             <children>
+                                                     <Button onMouseClicked="#handleNuovoEsame" text="Aggiungi nuovo esame" />
+                                                <Button fx:id="buttonCancel" cancelButton="true" mnemonicParsing="false" onAction="#handleButtonCancel" prefHeight="25.0" prefWidth="93.0" text="Cancella">
+                                                   <VBox.margin>
+                                                      <Insets top="20.0" />
+                                                   </VBox.margin></Button>
+                                                     <Label fx:id="LblMessaggioNuovoEsame" prefHeight="17.0" prefWidth="277.0" textAlignment="RIGHT" textFill="#d24a0c" underline="true">
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin></Label>
+                                             </children></VBox>
+                                       </children>
+                                        </HBox>
+                                      <VBox alignment="TOP_RIGHT" maxWidth="-Infinity" prefHeight="81.0" prefWidth="237.0" spacing="15">
+                                          <children>
+                                              <GridPane alignment="TOP_RIGHT" maxWidth="-Infinity" prefHeight="75.0" prefWidth="296.0">
+                                                  <columnConstraints>
+                                                      <ColumnConstraints hgrow="ALWAYS" />
+                                                      <ColumnConstraints hgrow="ALWAYS" />
+                                                      <ColumnConstraints hgrow="ALWAYS" />
+                                                  </columnConstraints>
+                                                  <children>
+                                                      <TextField fx:id="campoMateria" prefHeight="25.0" prefWidth="384.0" GridPane.columnIndex="0" />
+                                                      <TextField fx:id="campoCrediti" prefHeight="25.0" prefWidth="202.0" GridPane.rowIndex="1" />
+                                                      <TextField fx:id="campoDocente" GridPane.rowIndex="2" />
+                                                  </children>
+                                                 <rowConstraints>
+                                                    <RowConstraints />
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                                 </rowConstraints>
+                                              </GridPane>
+                                          </children>
+                                      </VBox>
+                                 </children>
+                              </HBox>
+                                  <HBox alignment="TOP_RIGHT" layoutX="25.0" layoutY="384.0" spacing="10">
+                                      <children>
+                                          <Button onMouseClicked="#handleModificaEsame" text="Modifica esame selezionato" />
+                                          <Button onMouseClicked="#handleEliminaEsame" text="Elimina esame selezionato" />
+                                      </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets top="33.0" />
+                                 </padding>
+                                  </HBox>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Grafico Esami">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <BarChart fx:id="esamiChartLine" alternativeRowFillVisible="false" barGap="1.0" categoryGap="3.0" layoutX="-1.0" layoutY="3.0" legendSide="RIGHT" prefHeight="508.0" prefWidth="886.0" title="Totale Esami">
+                                <xAxis>
+                                  <CategoryAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                              </BarChart>
+                           </children>
+                    </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+            </children>
+        </VBox>
+      <HBox alignment="TOP_RIGHT" prefHeight="0.0" prefWidth="750.0" />
+      <VBox alignment="BOTTOM_CENTER" prefHeight="17.0" prefWidth="750.0">
+         <children>
+            <ButtonBar prefHeight="10.0" prefWidth="750.0">
+              <buttons>
+                      <Button alignment="CENTER" defaultButton="true" mnemonicParsing="false" onMouseClicked="#handleSalvaPianoDiStudio" text="Salva" textAlignment="CENTER" />
+              </buttons>
+            </ButtonBar>
+         </children>
+      </VBox>
+    </children>
+</VBox>
