@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/IdeaProjects/12-Viaggio/12-Viaggio.iml" filepath="$PROJECT_DIR$/IdeaProjects/12-Viaggio/12-Viaggio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IdeaProjects/13 - Piano Di Studio/13 - Piano Di Studio.iml" filepath="$PROJECT_DIR$/IdeaProjects/13 - Piano Di Studio/13 - Piano Di Studio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IdeaProjects/14 - Alberi/14 - Alberi.iml" filepath="$PROJECT_DIR$/IdeaProjects/14 - Alberi/14 - Alberi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IdeaProjects/15 - ArithmeticExc/15 - ArithmeticExc.iml" filepath="$PROJECT_DIR$/IdeaProjects/15 - ArithmeticExc/15 - ArithmeticExc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IdeaProjects/17 - ChatWithSockets/17 - ChatWithSockets.iml" filepath="$PROJECT_DIR$/IdeaProjects/17 - ChatWithSockets/17 - ChatWithSockets.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IdeaProjects/18 - Aste/18 - Aste.iml" filepath="$PROJECT_DIR$/IdeaProjects/18 - Aste/18 - Aste.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IdeaProjects/19 - Raccolta dati/19 - Raccolta dati.iml" filepath="$PROJECT_DIR$/IdeaProjects/19 - Raccolta dati/19 - Raccolta dati.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IdeaProjects/20 - CompraVendita/20 - CompraVendita.iml" filepath="$PROJECT_DIR$/IdeaProjects/20 - CompraVendita/20 - CompraVendita.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IdeaProjects/Es1Matrici/Es1Matrici.iml" filepath="$PROJECT_DIR$/IdeaProjects/Es1Matrici/Es1Matrici.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IdeaProjects/Libreria/Libreria.iml" filepath="$PROJECT_DIR$/IdeaProjects/Libreria/Libreria.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IdeaProjects/PinaoDiStiudioFX/PinaoDiStiudioFX.iml" filepath="$PROJECT_DIR$/IdeaProjects/PinaoDiStiudioFX/PinaoDiStiudioFX.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IdeaProjects/es1Array/es1Array.iml" filepath="$PROJECT_DIR$/IdeaProjects/es1Array/es1Array.iml" />
+      <module fileurl="file://$PROJECT_DIR$/schoolProjects.iml" filepath="$PROJECT_DIR$/schoolProjects.iml" />
+      <module fileurl="file://$PROJECT_DIR$/schoolProjects1.iml" filepath="$PROJECT_DIR$/schoolProjects1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/schoolProjects10.iml" filepath="$PROJECT_DIR$/schoolProjects10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/schoolProjects11.iml" filepath="$PROJECT_DIR$/schoolProjects11.iml" />
+      <module fileurl="file://$PROJECT_DIR$/schoolProjects2.iml" filepath="$PROJECT_DIR$/schoolProjects2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/schoolProjects3.iml" filepath="$PROJECT_DIR$/schoolProjects3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/schoolProjects4.iml" filepath="$PROJECT_DIR$/schoolProjects4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/schoolProjects5.iml" filepath="$PROJECT_DIR$/schoolProjects5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/schoolProjects6.iml" filepath="$PROJECT_DIR$/schoolProjects6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/schoolProjects7.iml" filepath="$PROJECT_DIR$/schoolProjects7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/schoolProjects8.iml" filepath="$PROJECT_DIR$/schoolProjects8.iml" />
+      <module fileurl="file://$PROJECT_DIR$/schoolProjects9.iml" filepath="$PROJECT_DIR$/schoolProjects9.iml" />
+    </modules>
+  </component>
+</project>
