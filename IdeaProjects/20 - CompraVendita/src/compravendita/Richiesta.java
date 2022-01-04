@@ -1,13 +1,11 @@
 package compravendita;
 
-import java.util.Objects;
-
 public class Richiesta {
     private int iId;
     private int iQuantita;
 
     public Richiesta(int iId) {
-        this.iId = iId;
+        setId(iId);
     }
 
     public int getQuantita() {

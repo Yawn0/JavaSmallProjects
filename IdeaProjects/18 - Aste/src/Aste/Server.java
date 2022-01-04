@@ -14,17 +14,17 @@ public class Server implements Runnable{
 		LinkedList impements    List<T> . Queue<T> . Dequeue<T>
 		ArrayList implements    List<T>
 
-		quindi una List é pratica per essere utilizzata anche come una coda mentre un ArrayList no
+		quindi una List Ã¨ pratica per essere utilizzata anche come una coda mentre un ArrayList no
 	 */
-	// una SkipList viene utilizzata quando c'é necessità di avere una lista ordinata
-	// una SkipListSet viene utilizzata quando c'é necessità di avere un set ordinato
+	// una SkipList viene utilizzata quando c'Ã¨ necessitÃ  di avere una lista ordinata
+	// una SkipListSet viene utilizzata quando c'Ã¨ necessitÃ  di avere un set ordinato
 	private static ConcurrentSkipListSet<Date> lstDate = new ConcurrentSkipListSet<>();
 	private static final int PORTAC=1111;
 	private static final int PORTAM=2222;
 	private static ConcurrentHashMap<Prodotto,TreeSet<Offerta>> hmOfferte = new ConcurrentHashMap<>();	// un TreeSet viene utilizzato per non avere valori doppi
 	private static boolean bGestione =false;
 
-	private static HashMap prova; 	// una HashMap é più efficiente di una semplice Map
+	private static HashMap prova; 	// una HashMap Ã¨ piÃ¹ efficiente di una semplice Map
 	
 	public void run() {
 		try {
@@ -98,7 +98,7 @@ public class Server implements Runnable{
 						abBuffer = new ByteArrayOutputStream();
 						oOutputStream = new ObjectOutputStream(abBuffer);
 
-						oOutputStream.writeObject(hmOfferte.get(oProdotto).last());	// ultimo perché il set é ordinato per offerte e si prende l'iporto più alto
+						oOutputStream.writeObject(hmOfferte.get(oProdotto).last());	// ultimo perchï¿½ il set ï¿½ ordinato per offerte e si prende l'iporto piï¿½ alto
 
 						oDatagramPacket = new DatagramPacket(abBuffer.toByteArray(), abBuffer.toByteArray().length,InetAddress.getByName(ADDRESSG),PORTAM);
 

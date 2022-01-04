@@ -1,27 +1,50 @@
 package compravendita;
 
-import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.LinkedList;
+import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListSet;
 
-public class Intermediario {
+public class Intermediario implements Runnable{
 
-    public static void main(String[] args) {
-        try {
+    private Richiesta oRichiesta;
+    private static LinkedList<Venditore> lstVenditori = new LinkedList<>();
+    private static ConcurrentSkipListSet<Integer> lstQuantita = new ConcurrentSkipListSet<>();
+    private static ConcurrentHashMap<Integer,TreeSet<Richiesta>> hmRichieste = new ConcurrentHashMap<>();
 
-            ServerSocket oServerSocket = new ServerSocket(2345);
+    @Override
+    public void run() {
+        new Thread(() -> {
+            try {
+                ServerSocket oServerSocket = new ServerSocket(2345);
 
-            while(true){
+                while(true){
 
-                Socket oSocket = oServerSocket.accept();
+                    TreeSet<Richiesta> stRichieste;
 
+                    Socket oSocket = oServerSocket.accept();
+                    String sInput;
+                    ObjectInputStream oInputStream = new ObjectInputStream(oSocket.getInputStream());
+
+                    oRichiesta = (Richiesta) oInputStream.readObject();
+
+                    stRichieste = hmRichieste.get(oRichiesta.getId());
+
+                    if(stRichieste != null){
+
+                        stRichieste.add(oRichiesta);
+                        lstQuantita.add(oRichiesta.getQuantita());
+
+                    }
+
+                }
+
+            } catch (Exception oException) {
+                oException.printStackTrace();
             }
-
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        }).start();
     }
-
 }
