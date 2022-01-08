@@ -18,9 +18,9 @@ public class Client implements Runnable {
 			Calendar oCalendar = Calendar.getInstance();
 
 			Random oRandom = new Random();
-			oCalendar.set(oRandom.nextInt(2031-2020)+2020, oRandom.nextInt(12), oRandom.nextInt(28)+1);
+			oCalendar.set(oRandom.nextInt(2031 - 2020) + 2020, oRandom.nextInt(12), oRandom.nextInt(28) + 1);
 
-			Prodotto oProdotto = new Prodotto("Jaguar",new Date(oCalendar.getTimeInMillis()));
+			Prodotto oProdotto = new Prodotto("Jaguar", new Date(oCalendar.getTimeInMillis()));
 
 			double dPrezzo = oRandom.nextInt(70001 - 37450) + 37450;
 
@@ -33,14 +33,14 @@ public class Client implements Runnable {
 //			oOutputStream.close();
 
 			ObjectInputStream oReader = new ObjectInputStream(oSocket.getInputStream());
-			String sConferma = (String) oReader.readObject();	//legge la risposta dal server (perché il messaggio dal client é inviato in TCP)
+			String sConferma = (String) oReader.readObject();    //legge la risposta dal server (perchï¿½ il messaggio dal client ï¿½ inviato in TCP)
 //			oReader.close();
 
 			if(sConferma.equals("Offerta accettata")) {
 
 				System.out.println(sConferma);
 
-				Thread.sleep(oProdotto.getData().getTime()- oOfferta.getData().getTime()-10000);	//orario di scadenza - l'orario dell'offerta
+				Thread.sleep(oProdotto.getData().getTime() - oOfferta.getData().getTime() - 10000);    //orario di scadenza - l'orario dell'offertaz
 
 				MulticastSocket oMulticastSocket = new MulticastSocket(2222);
 				oMulticastSocket.joinGroup(InetAddress.getByName("230.0.0.1"));
@@ -54,8 +54,10 @@ public class Client implements Runnable {
 				ObjectInputStream oInputStream = new ObjectInputStream(oData);
 				Offerta oBestOfferta = (Offerta) oInputStream.readObject();
 
-				if(oBestOfferta.equals(oOfferta))
-					System.out.println("Abbiamo vinto l' asta per il prodotto "+ oProdotto.getNome());
+				if (oBestOfferta.equals(oOfferta)) {
+
+					System.out.println("Abbiamo vinto l' asta per il prodotto " + oProdotto.getNome());
+				}
 				//oInputStream.close();
 				oMulticastSocket.close();
 			}

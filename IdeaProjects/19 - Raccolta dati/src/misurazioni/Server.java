@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
 
 //public class Server implements Runnable {
-//    private ConcurrentHashMap<Integer, Misura> mapMisureDataBase = new ConcurrentHashMap<>();   //memorizzo per ogni sensore la misura più recente disponibile
+//    private ConcurrentHashMap<Integer, Misura> mapMisureDataBase = new ConcurrentHashMap<>();   //memorizzo per ogni sensore la misura piï¿½ recente disponibile
 //
 //    public void run() {
 //        new Thread(() -> {
@@ -32,7 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
 //                    long lInitialTimestamp =Long.parseLong(oTokenizer.nextToken());
 //                    long lFinalTimeStamp = Long.parseLong(oTokenizer.nextToken());
 //
-//                    //suppongo che lInitialTimestamp abbia sempre un valore che sia più grande del tempo corrente in millisecondi
+//                    //suppongo che lInitialTimestamp abbia sempre un valore che sia piï¿½ grande del tempo corrente in millisecondi
 //                    Thread.sleep(lFinalTimeStamp - lInitialTimestamp);
 //                    Misura oFristMisura = mapMisureDataBase.get(iId);
 //                    Thread.sleep(lFinalTimeStamp - lInitialTimestamp);
@@ -149,7 +149,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Server implements Runnable {
 
-    private ConcurrentHashMap<Integer, Misura> hmMisure = new ConcurrentHashMap<>();  //memorizzo per ogni sensore la misura più recente disponibile
+    private ConcurrentHashMap<Integer, Misura> hmMisure = new ConcurrentHashMap<>();  //memorizzo per ogni sensore la misura piï¿½ recente disponibile
 
     public void run() {
 
@@ -233,8 +233,8 @@ public class Server implements Runnable {
                     oDatagramSocket.receive(oDatagramPacket);
 
                     String sInput = Arrays.toString(oDatagramPacket.getData());
-
                     StringTokenizer oTokenizer = new StringTokenizer(sInput, " ");
+
                     Integer iId = Integer.parseInt(oTokenizer.nextToken());
                     String sGrandezza = oTokenizer.nextToken();
                     double dValore=Double.parseDouble(oTokenizer.nextToken());

@@ -1,11 +1,18 @@
 package compravendita;
 
 public class Richiesta {
-    private int iId;
+    private int iIdProdotto;
     private int iQuantita;
+    private long lTimestamp;
 
-    public Richiesta(int iId) {
-        setId(iId);
+    public Richiesta(int iIdProdotto) {
+        setId(iIdProdotto);
+    }
+
+    public Richiesta(int iIdProdotto, int iQuantita){
+        setId(iIdProdotto);
+        setQuantita(iQuantita);
+        lTimestamp = System.currentTimeMillis();
     }
 
     public int getQuantita() {
@@ -17,19 +24,15 @@ public class Richiesta {
     }
 
     public int getId() {
-        return iId;
+        return iIdProdotto;
     }
 
     public void setId(int iId) {
-        this.iId = iId;
+        this.iIdProdotto = iId;
     }
 
-    @Override
-    public String toString() {
-        return "Richiesta{" +
-                "iId=" + getId() +
-                ", iQuantita=" + getQuantita() +
-                '}';
+    public long getTimestamp() {
+        return lTimestamp;
     }
 
     @Override
@@ -40,6 +43,6 @@ public class Richiesta {
         if(this == oObject)
             return true;
 
-        return iId == oRichiesta.getId() && iQuantita == oRichiesta.getQuantita() ;
+        return iIdProdotto == oRichiesta.getId() && iQuantita == oRichiesta.getQuantita() ;
     }
 }
