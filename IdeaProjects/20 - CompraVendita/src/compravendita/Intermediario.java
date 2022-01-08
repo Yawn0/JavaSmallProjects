@@ -1,11 +1,12 @@
 package compravendita;
 
+import javax.management.timer.Timer;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.*;
-import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Intermediario implements Runnable{
 
@@ -13,13 +14,13 @@ public class Intermediario implements Runnable{
     private static final String HOST_NAME = "intermediario.eu";
     private final int TCP_PORT;
     private final int UDP_PORT;
-    private static ConcurrentSkipListSet<Integer> lstQuantita = new ConcurrentSkipListSet<>();
-    private static ConcurrentHashMap<Integer,TreeSet<Richiesta>> hmRichieste = new ConcurrentHashMap<>();
+    private static final ConcurrentLinkedQueue<Richiesta> queRichieste = new ConcurrentLinkedQueue<>();
+    private static final ConcurrentLinkedQueue<Risposta> queRisposte = new ConcurrentLinkedQueue<>();
     private final int BUFFER_LENGTH = 512;
 
-    public static Intermediario getSingleton(int iPort,int iPort2){
+    public static Intermediario getSingleton(int iPortTCP, int iPortUDP){
         if(SINGLETON == null){
-            SINGLETON = new Intermediario(iPort,iPort2);
+            SINGLETON = new Intermediario(iPortTCP, iPortUDP);
         }
         return SINGLETON;
     }
@@ -31,42 +32,29 @@ public class Intermediario implements Runnable{
 
     @Override
     public void run() {
-        new Thread(this::manageRequests).start();
+        new Thread(this::catchRequest).start();
+        new Thread(this::sendRequest).start();
+        new Thread(this::catchResponse).start();
+        new Thread(this::sendResponse).start();
     }
 
-    private void manageRequests(){
+    private void catchRequest(){
         try {
 
             ServerSocket oServerSocket = new ServerSocket(TCP_PORT);
-            MulticastSocket oMulticastSocket = new MulticastSocket(UDP_PORT);
-
-            oMulticastSocket.joinGroup(new InetSocketAddress(InetAddress.getByName(HOST_NAME), UDP_PORT),null); // ????????????
-
-            byte[] abBuffer = new byte[BUFFER_LENGTH];
-
-            DatagramPacket oDatagramPacket = new DatagramPacket(abBuffer, abBuffer.length);
-            oMulticastSocket.receive(oDatagramPacket);
-
-            ByteArrayInputStream oData = new ByteArrayInputStream(oDatagramPacket.getData());
-            ObjectInputStream oInputStream = new ObjectInputStream(oData);
-
 
             while(true){
 
-                TreeSet<Richiesta> stRichieste;
+                try{
 
-                Socket oSocket = oServerSocket.accept();
-                oInputStream = new ObjectInputStream(oSocket.getInputStream());
+                    Socket oSocket = oServerSocket.accept();
+                    ObjectInputStream oInputStream = new ObjectInputStream(oSocket.getInputStream());
 
-                Richiesta oRichiesta = (Richiesta) oInputStream.readObject();
-
-                stRichieste = hmRichieste.get(oRichiesta.getId());
-
-                if(stRichieste != null){
-
-                    stRichieste.add(oRichiesta);
-                    lstQuantita.add(oRichiesta.getQuantita());
-
+                    Richiesta oRichiesta = (Richiesta) oInputStream.readObject();
+                    queRichieste.add(oRichiesta);
+                }
+                catch (Exception oException){
+                    oException.printStackTrace();
                 }
             }
 
@@ -75,7 +63,94 @@ public class Intermediario implements Runnable{
         }
     }
 
-    private void mangaeResponses(){
+    private void sendRequest(){
 
+        try{
+
+            MulticastSocket oMulticastSocket = new MulticastSocket(UDP_PORT);
+            ByteArrayOutputStream oByteArrayOutput = new ByteArrayOutputStream();
+            ObjectOutputStream oOutputStream = new ObjectOutputStream(oByteArrayOutput);
+            DatagramPacket oDatagramPacket;
+
+            while(true){
+
+                if(!queRichieste.isEmpty()){
+
+                    oOutputStream.writeObject(queRichieste.poll());
+
+                    oDatagramPacket = new DatagramPacket(oByteArrayOutput.toByteArray(),
+                                                         oByteArrayOutput.toByteArray().length,
+                                                         InetAddress.getByName(HOST_NAME),
+                                                         UDP_PORT);
+
+                    oMulticastSocket.send(oDatagramPacket);
+                }
+            }
+        }
+        catch (Exception oException){
+            oException.printStackTrace();
+        }
+    }
+
+    private void catchResponse(){
+        try {
+
+            MulticastSocket oMulticastSocket = new MulticastSocket(UDP_PORT);
+
+            oMulticastSocket.joinGroup(new InetSocketAddress(InetAddress.getByName(HOST_NAME), UDP_PORT),null); // ????????????
+
+            byte[] abBuffer = new byte[BUFFER_LENGTH];
+
+            DatagramPacket oDatagramPacket = new DatagramPacket(abBuffer, abBuffer.length);
+
+            while(true){
+
+                oMulticastSocket.receive(oDatagramPacket);
+
+                ByteArrayInputStream oData = new ByteArrayInputStream(oDatagramPacket.getData());
+                ObjectInputStream oInputStream = new ObjectInputStream(oData);
+                Risposta oRisposta = (Risposta) oInputStream.readObject();
+
+                queRisposte.add(oRisposta);
+            }
+
+        } catch (Exception oException) {
+            oException.printStackTrace();
+        }
+    }
+
+    private void sendResponse(){
+
+        try{
+
+            long lStartTiemetamp = System.currentTimeMillis();
+
+            MulticastSocket oMulticastSocket = new MulticastSocket(TCP_PORT);
+            ByteArrayOutputStream abBuffer = new ByteArrayOutputStream();
+            ObjectOutputStream oOutputStream = new ObjectOutputStream(abBuffer);
+            while(true){
+
+                if((System.currentTimeMillis() - lStartTiemetamp) <= Timer.ONE_MINUTE){
+
+                    for(Risposta oRisposta : queRisposte) {
+                        oOutputStream.writeObject(oRisposta);
+
+                        DatagramPacket oDatagramPacket = new DatagramPacket(abBuffer.toByteArray(),
+                                                                            abBuffer.toByteArray().length,
+                                                                            InetAddress.getByName(HOST_NAME),
+                                                                            TCP_PORT);
+
+                        oMulticastSocket.send(oDatagramPacket);
+
+                        queRisposte.remove(oRisposta);
+
+                        lStartTiemetamp = System.currentTimeMillis();
+                    }
+                }
+            }
+
+        }catch(Exception oException){
+            oException.printStackTrace();
+        }
     }
 }

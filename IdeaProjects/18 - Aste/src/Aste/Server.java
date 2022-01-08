@@ -18,10 +18,10 @@ public class Server implements Runnable{
 	 */
 	// una SkipList viene utilizzata quando c'è necessità di avere una lista ordinata
 	// una SkipListSet viene utilizzata quando c'è necessità di avere un set ordinato
-	private static ConcurrentSkipListSet<Date> lstDate = new ConcurrentSkipListSet<>();
+	private static final ConcurrentSkipListSet<Date> lstDate = new ConcurrentSkipListSet<>();
 	private static final int PORTAC=1111;
 	private static final int PORTAM=2222;
-	private static ConcurrentHashMap<Prodotto,TreeSet<Offerta>> hmOfferte = new ConcurrentHashMap<>();	// un TreeSet viene utilizzato per non avere valori doppi
+	private static final ConcurrentHashMap<Prodotto,TreeSet<Offerta>> hmOfferte = new ConcurrentHashMap<>();	// un TreeSet viene utilizzato per non avere valori doppi
 	private static boolean bGestione =false;
 
 	private static HashMap prova; 	// una HashMap è più efficiente di una semplice Map
@@ -37,7 +37,7 @@ public class Server implements Runnable{
 				Offerta oOfferta = (Offerta) oInputStream.readObject();
 				String sOutput;
 
-				if(oOfferta.getData().compareTo(oOfferta.getProdotto().getData())<=0) {
+				if(oOfferta.getData().compareTo(oOfferta.getProdotto().getData()) <= 0) {
 
 					TreeSet<Offerta> tsOfferte = hmOfferte.get(oOfferta.getProdotto());
 
@@ -89,7 +89,7 @@ public class Server implements Runnable{
 							lstInScadenza.add(oProdotto);
 
 					MulticastSocket oMulticastSocket = new MulticastSocket(PORTAM);	// invio mesaggi ai client
-					DatagramPacket oDatagramPacket;		// invio messaggio TCP
+					DatagramPacket oDatagramPacket;
 					ObjectOutputStream oOutputStream;
 					ByteArrayOutputStream abBuffer;
 

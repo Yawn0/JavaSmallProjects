@@ -34,35 +34,35 @@ public class Cliente implements Runnable {
             oOutStream.writeObject(oRichiesta);
             oOutStream.close();
 
-            ObjectInputStream oInStream = new ObjectInputStream(oSocket.getInputStream());
-            String sRisposta = (String) oInStream.readObject();
-            oInStream.close();
+            boolean bMathced = false;
 
-            StringTokenizer oTokenizer = new StringTokenizer(sRisposta,Risposta.DELIMITER);
+            while(!bMathced){
 
-            iIdProdotto = Integer.parseInt(oTokenizer.nextToken());
-            iQuantita = Integer.parseInt(oTokenizer.nextToken());
+                ObjectInputStream oInStream = new ObjectInputStream(oSocket.getInputStream());
+                String sRisposta = (String) oInStream.readObject();
+                oInStream.close();
 
-            if(new Richiesta(iIdProdotto,iQuantita).equals(oRichiesta)){
+                StringTokenizer oTokenizer = new StringTokenizer(sRisposta,Risposta.DELIMITER);
 
+                iIdProdotto = Integer.parseInt(oTokenizer.nextToken());
+                iQuantita = Integer.parseInt(oTokenizer.nextToken());
                 int iPrezzoTotale = Integer.parseInt(oTokenizer.nextToken());
                 int iIdIntermediario = Integer.parseInt(oTokenizer.nextToken());
 
-                if(iPrezzoTotale != -1){
+                if(new Richiesta(iIdProdotto,iQuantita).equals(oRichiesta)){
 
                     System.out.printf("""
-                        >> Richiesta accettata!
-                        Prodotto :      %d
-                        Quantità:       %dKg
-                        Prezzo Totale:  %d€
-                        \n""", iIdProdotto,iQuantita,iPrezzoTotale);
+                    >> Richiesta accettata!
+                    Prodotto :      %d
+                    Quantità:       %d Kg
+                    Prezzo Totale:  %d €
+                    \n""", iIdProdotto,iQuantita,iPrezzoTotale);
+
+                    bMathced = true;
                 }
-                else {
-                    System.out.println(" >> Richiesta respinta :( \n");
+                else{
+                    System.out.println("...");
                 }
-            }
-            else{
-                System.out.println(">> Risposta non combaciante");
             }
 
         } catch (IOException | ClassNotFoundException oException) {
