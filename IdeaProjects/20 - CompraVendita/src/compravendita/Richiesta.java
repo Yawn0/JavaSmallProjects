@@ -1,6 +1,12 @@
 package compravendita;
 
-public class Richiesta {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Richiesta implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
     private int iIdProdotto;
     private int iQuantita;
     private long lTimestamp;
@@ -44,5 +50,10 @@ public class Richiesta {
             return true;
 
         return iIdProdotto == oRichiesta.getId() && iQuantita == oRichiesta.getQuantita() ;
+    }
+
+    @Override
+    public String toString() {
+        return getId() + ";" + getQuantita();
     }
 }

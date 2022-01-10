@@ -1,7 +1,12 @@
 package compravendita;
 
-public class Risposta {
+import java.io.Serial;
+import java.io.Serializable;
 
+public class Risposta implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
     public static final String DELIMITER = ";";
 
     Richiesta oRichiesta;

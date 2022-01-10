@@ -44,6 +44,8 @@ public class Venditore implements Runnable {
         DatagramPacket oDatagramPacket;
         DatagramSocket oDatagramSocket;
 
+//        oDatagramSocket.setSoTimeout(60000);
+
         try {
 
             oDatagramSocket = new DatagramSocket(UDP_PORT,InetAddress.getByName(SERVER_NAME));
