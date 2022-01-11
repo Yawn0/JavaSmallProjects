@@ -2,13 +2,13 @@ package compravendita;
 
 public class Main {
 
-    private static final int N_VENDITORI = 5;
-    private static final int N_CLIENTI = 7;
+    private static final int N_VENDITORI = 2;
+    private static final int N_CLIENTI = 3;
 
     private static final int TCP_PORT = 2345;
     private static final int UDP_PORT = 6789;
 
-    private static final String SERVER_NAME = "intermediario.eu";
+    private static final String SERVER_NAME = "192.168.0.109";
 
     public static void main(String[] args) {
 

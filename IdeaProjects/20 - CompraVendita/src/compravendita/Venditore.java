@@ -40,8 +40,10 @@ public class Venditore implements Runnable {
 
         try {
 
-            DatagramSocket oDatagramSocket = new DatagramSocket(UDP_PORT);
+            DatagramSocket oDatagramSocket = new DatagramSocket();  // Address already in use
             DatagramPacket oDatagramPacket = new DatagramPacket(abInputData, abInputData.length);
+
+            oDatagramSocket.connect(InetAddress.getByName(SERVER_NAME),UDP_PORT);
 
             while(true){
 

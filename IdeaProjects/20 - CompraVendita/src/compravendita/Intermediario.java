@@ -54,6 +54,7 @@ public class Intermediario implements Runnable{
 
                 System.out.println(oRichiesta.toString());
 
+                oServerSocket.close();
                 oSocket.close();
             }
 
@@ -84,7 +85,7 @@ public class Intermediario implements Runnable{
 
             while((System.currentTimeMillis() - lStartTimetamp) <= Timer.ONE_MINUTE){
 
-                MulticastSocket oMulticastSocket = new MulticastSocket(UDP_PORT);
+                MulticastSocket oMulticastSocket = new MulticastSocket();       // Address already in use
 
                 if(!lstRichieste.isEmpty()){
 
