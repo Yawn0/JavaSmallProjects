@@ -8,23 +8,24 @@ public class Main {
     private static final int TCP_PORT = 2345;
     private static final int UDP_PORT = 6789;
 
-    private static final String HOST_NAME = "intermediario.eu";
+    private static final String SERVER_NAME = "intermediario.eu";
 
     public static void main(String[] args) {
 
-        Intermediario oIntermediario = Intermediario.getSingleton(TCP_PORT,UDP_PORT);
         Venditore oVenditore;
         Cliente oCliente;
 
-        new Thread(oIntermediario).start();
+        new Thread(Intermediario.getSingleton(TCP_PORT,UDP_PORT)).start();
 
         for(int iIndex = 0; iIndex < N_VENDITORI; iIndex++){
-            oVenditore = new Venditore(UDP_PORT, HOST_NAME);
+
+            oVenditore = new Venditore(UDP_PORT, SERVER_NAME);
             new Thread(oVenditore).start();
         }
 
         for(int iIndex = 0; iIndex < N_CLIENTI; iIndex++){
-            oCliente = new Cliente(TCP_PORT,HOST_NAME);
+
+            oCliente = new Cliente(TCP_PORT, SERVER_NAME);
             new Thread(oCliente).start();
         }
     }

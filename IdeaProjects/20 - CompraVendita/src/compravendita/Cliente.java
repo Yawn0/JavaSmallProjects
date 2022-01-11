@@ -6,7 +6,6 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Random;
-import java.util.StringTokenizer;
 
 public class Cliente implements Runnable {
 
@@ -26,39 +25,32 @@ public class Cliente implements Runnable {
 
             Random oRandom = new Random();
             int iIdProdotto = oRandom.nextInt(0,Venditore.Prodotti.values().length);
-            int iQuantita = oRandom.nextInt(1,999);
+            int iQuantita = oRandom.nextInt(1,1000);
 
             Richiesta oRichiesta = new Richiesta(iIdProdotto,iQuantita);
 
             ObjectOutputStream oOutStream = new ObjectOutputStream(oSocket.getOutputStream());
             oOutStream.writeObject(oRichiesta);
-            oOutStream.close();
+            oOutStream.flush();
 
-            boolean bMathced = false;
+            ObjectInputStream oInputStream = new ObjectInputStream(oSocket.getInputStream());
 
-            while(!bMathced){
+            while(true){
 
-                ObjectInputStream oInStream = new ObjectInputStream(oSocket.getInputStream());
-                String sRisposta = (String) oInStream.readObject();
-                oInStream.close();
+                Risposta oRisposta = (Risposta) oInputStream.readObject();
+                oInputStream.close();
 
-                StringTokenizer oTokenizer = new StringTokenizer(sRisposta,Risposta.DELIMITER);
-
-                iIdProdotto = Integer.parseInt(oTokenizer.nextToken());
-                iQuantita = Integer.parseInt(oTokenizer.nextToken());
-                int iPrezzoTotale = Integer.parseInt(oTokenizer.nextToken());
-                int iIdIntermediario = Integer.parseInt(oTokenizer.nextToken());
-
-                if(new Richiesta(iIdProdotto,iQuantita).equals(oRichiesta)){
+                if(oRisposta.oRichiesta.equals(oRichiesta)){
 
                     System.out.printf("""
                     >> Richiesta accettata!
                     Prodotto :      %d
                     Quantità:       %d Kg
                     Prezzo Totale:  %d €
-                    \n""", iIdProdotto,iQuantita,iPrezzoTotale);
+                    \n""", oRisposta.oRichiesta.getiIdProdotto()
+                            ,oRisposta.oRichiesta.getQuantita()
+                            ,oRisposta.getPrezzoTotale());
 
-                    bMathced = true;
                 }
                 else{
                     System.out.println("...");

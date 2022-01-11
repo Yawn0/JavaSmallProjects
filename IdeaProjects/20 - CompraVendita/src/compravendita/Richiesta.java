@@ -2,6 +2,7 @@ package compravendita;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Date;
 
 public class Richiesta implements Serializable {
 
@@ -9,7 +10,7 @@ public class Richiesta implements Serializable {
     private static final long serialVersionUID = 1L;
     private int iIdProdotto;
     private int iQuantita;
-    private long lTimestamp;
+    private Date oData;
 
     public Richiesta(int iIdProdotto) {
         setId(iIdProdotto);
@@ -18,7 +19,7 @@ public class Richiesta implements Serializable {
     public Richiesta(int iIdProdotto, int iQuantita){
         setId(iIdProdotto);
         setQuantita(iQuantita);
-        lTimestamp = System.currentTimeMillis();
+        oData = new Date();
     }
 
     public int getQuantita() {
@@ -29,7 +30,7 @@ public class Richiesta implements Serializable {
         this.iQuantita = iQuantita;
     }
 
-    public int getId() {
+    public int getiIdProdotto() {
         return iIdProdotto;
     }
 
@@ -37,8 +38,8 @@ public class Richiesta implements Serializable {
         this.iIdProdotto = iId;
     }
 
-    public long getTimestamp() {
-        return lTimestamp;
+    public Date getDate() {
+        return oData;
     }
 
     @Override
@@ -49,11 +50,11 @@ public class Richiesta implements Serializable {
         if(this == oObject)
             return true;
 
-        return iIdProdotto == oRichiesta.getId() && iQuantita == oRichiesta.getQuantita() ;
+        return iIdProdotto == oRichiesta.getiIdProdotto() && iQuantita == oRichiesta.getQuantita() ;
     }
 
     @Override
     public String toString() {
-        return getId() + ";" + getQuantita();
+        return getiIdProdotto() + ";" + getQuantita();
     }
 }

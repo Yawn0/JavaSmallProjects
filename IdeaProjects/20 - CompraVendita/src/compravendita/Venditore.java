@@ -1,21 +1,19 @@
 package compravendita;
 
-import javax.management.timer.Timer;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.Random;
-import java.util.StringTokenizer;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Venditore implements Runnable {
 
     private final int UDP_PORT;
     private final String SERVER_NAME;
-    private final int BUFFER_LENGTH = 512;
-    private ConcurrentLinkedQueue<Richiesta> queRichieste = new ConcurrentLinkedQueue<>();
+    private final int BUFFER_LENGTH = 1024;
 
     public enum Prodotti{
         Banana,
@@ -33,68 +31,43 @@ public class Venditore implements Runnable {
 
     @Override
     public void run() {
-        new Thread(this::getRequests).start();
-        new Thread(this::sendResponse).start();
+        new Thread(this::manageRequests).start();
     }
 
-    private void getRequests(){
+    private void manageRequests(){
 
         final byte[] abInputData = new byte[BUFFER_LENGTH];
 
-        DatagramPacket oDatagramPacket;
-        DatagramSocket oDatagramSocket;
-
-//        oDatagramSocket.setSoTimeout(60000);
-
         try {
 
-            oDatagramSocket = new DatagramSocket(UDP_PORT,InetAddress.getByName(SERVER_NAME));
-            oDatagramPacket = new DatagramPacket(abInputData,abInputData.length);
+            DatagramSocket oDatagramSocket = new DatagramSocket(UDP_PORT);
+            DatagramPacket oDatagramPacket = new DatagramPacket(abInputData, abInputData.length);
 
             while(true){
 
                 oDatagramSocket.receive(oDatagramPacket);
 
-                String sInput = Arrays.toString(oDatagramPacket.getData());
-                StringTokenizer oTokenizer = new StringTokenizer(sInput, Risposta.DELIMITER);
+                ByteArrayInputStream oData = new ByteArrayInputStream(oDatagramPacket.getData());
+                ObjectInputStream oInputStream = new ObjectInputStream(oData);
 
-                int iIdProdotto = Integer.parseInt(oTokenizer.nextToken());
-                int iQuantita = Integer.parseInt(oTokenizer.nextToken());
+                Richiesta oRichiesta = (Richiesta) oInputStream.readObject();
 
-                Richiesta oRichiesta = new Richiesta(iIdProdotto, iQuantita);
+                Random oRandom = new Random();
 
-                queRichieste.add(oRichiesta);
-            }
+//                if(oRichiesta != null && (System.currentTimeMillis() - oRichiesta.getDate().getTime()) < Timer.ONE_MINUTE){
+                if(oRichiesta != null){
 
-        } catch (Exception oException) {
-            oException.printStackTrace();
-        }
-    }
+                    Risposta oRisposta = new Risposta(oRichiesta, oRandom.nextInt());
 
-    private void sendResponse(){
+                    ByteArrayOutputStream oByteArrayOutput = new ByteArrayOutputStream();
+                    ObjectOutputStream oOutputStream = new ObjectOutputStream(oByteArrayOutput);
 
-        final byte[] abOutputData = new byte[BUFFER_LENGTH];
+                    oOutputStream.writeObject(oRisposta);
 
-        Random oRandom = new Random();
-        DatagramPacket oDatagramPacket;
-        DatagramSocket oDatagramSocket;
-
-        try {
-
-            oDatagramSocket = new DatagramSocket(UDP_PORT);
-            oDatagramPacket = new DatagramPacket(abOutputData,abOutputData.length);
-
-            while(true){
-
-                Richiesta oRichiesta = queRichieste.poll();
-
-                if(oRichiesta != null && (System.currentTimeMillis() - oRichiesta.getTimestamp()) < Timer.ONE_MINUTE){
-
-                    Risposta oRisposta = new Risposta(oRichiesta, oRandom.nextInt(), oRandom.nextInt());
-
-                    String sOutput = oRisposta.toString();
-
-                    oDatagramPacket.setData(sOutput.getBytes(StandardCharsets.UTF_8));
+                    oDatagramPacket = new DatagramPacket(oByteArrayOutput.toByteArray(),
+                            oByteArrayOutput.toByteArray().length,
+                            InetAddress.getByName(SERVER_NAME),
+                            UDP_PORT);
 
                     oDatagramSocket.send(oDatagramPacket);
                 }
