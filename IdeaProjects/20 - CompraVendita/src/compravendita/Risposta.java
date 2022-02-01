@@ -8,10 +8,8 @@ public class Risposta implements Serializable,Comparable<Risposta> {
     @Serial
     private static final long serialVersionUID = 1L;
     public static final String DELIMITER = ";";
-
-    Richiesta oRichiesta;
-
     private int iPrezzoTotale;
+    Richiesta oRichiesta;
 
     public Risposta(Richiesta oRichiesta, int iPrezzoTotale) {
         this.oRichiesta = oRichiesta;

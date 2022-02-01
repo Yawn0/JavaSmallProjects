@@ -40,10 +40,10 @@ public class Venditore implements Runnable {
 
         try {
 
-            DatagramSocket oDatagramSocket = new DatagramSocket();  // Address already in use
+            DatagramSocket oDatagramSocket = new DatagramSocket();
             DatagramPacket oDatagramPacket = new DatagramPacket(abInputData, abInputData.length);
 
-            oDatagramSocket.connect(InetAddress.getByName(SERVER_NAME),UDP_PORT);
+//            oDatagramSocket.connect(InetAddress.getByName(SERVER_NAME),UDP_PORT);
 
             while(true){
 
@@ -56,7 +56,6 @@ public class Venditore implements Runnable {
 
                 Random oRandom = new Random();
 
-//                if(oRichiesta != null && (System.currentTimeMillis() - oRichiesta.getDate().getTime()) < Timer.ONE_MINUTE){
                 if(oRichiesta != null){
 
                     Risposta oRisposta = new Risposta(oRichiesta, oRandom.nextInt());

@@ -40,9 +40,6 @@ public class Intermediario implements Runnable{
 
     private void manageClients(){
         try {
-
-            System.out.println("Inizio ricezione richieste");
-
             while(bOnTime){
 
                 ServerSocket oServerSocket = new ServerSocket(TCP_PORT);
