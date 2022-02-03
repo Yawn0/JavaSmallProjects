@@ -14,10 +14,10 @@ public class Main {
         new Thread(new Server()).start();
 
         for(int iIndex = 0; iIndex < iNumeroSensori; iIndex++)
-            new Thread(new Sensore(iIndex, InetAddress.getByName(sServerIP))).start();
+            new Thread(new Sensore(iIndex, InetAddress.getLocalHost())).start();
 
         for(int iIndex = 0; iIndex < iNumeroClient; iIndex++)
-            new Thread(new Client(iNumeroSensori,InetAddress.getByName(sServerIP))).start();
+            new Thread(new Client(iNumeroSensori,InetAddress.getLocalHost())).start();
     }
 }
 

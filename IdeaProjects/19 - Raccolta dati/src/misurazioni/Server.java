@@ -162,11 +162,13 @@ public class Server implements Runnable {
                 while(true) {
 
                     oSocket = oServerSocket.accept();
-                    String sInput;
 
-                    try (BufferedReader oBufferedReader = new BufferedReader(new InputStreamReader(oSocket.getInputStream()))) {
-                        sInput = oBufferedReader.readLine();
-                    }
+                    System.out.println("start 3000");
+
+                    BufferedReader oBufferedReader = new BufferedReader(new InputStreamReader(oSocket.getInputStream()));
+                    String sInput = oBufferedReader.readLine();
+
+                    System.out.println("mid 3000");
 
                     StringTokenizer sTokenizer = new StringTokenizer(sInput, " ");
 
@@ -174,17 +176,16 @@ public class Server implements Runnable {
                     long lStarTime= Long.parseLong(sTokenizer.nextToken());
                     long lEndTime = Long.parseLong(sTokenizer.nextToken());
 
-                    Thread.sleep(lEndTime-lStarTime);
                     Misura oMsiuraFirst = hmMisure.get(iId);
 
-                    Thread.sleep(lEndTime-lStarTime);
                     Misura oMisuraSecond = hmMisure.get(iId);
 
-                    try(ObjectOutputStream oOutputStream = new ObjectOutputStream(oSocket.getOutputStream())){
+                    ObjectOutputStream oOutputStream = new ObjectOutputStream(oSocket.getOutputStream());
                         oOutputStream.writeObject(new Misura(oMisuraSecond.getGrandezza(),(oMsiuraFirst.getValore()+ oMisuraSecond.getValore())/2 ,System.currentTimeMillis()));
-                    }
 
                     oSocket.close();
+
+                    System.out.println("end 3000");
                 }
 
             }catch(Exception oException) {
@@ -199,22 +200,26 @@ public class Server implements Runnable {
                 ServerSocket oServerSocket = new ServerSocket(2000);
                 Socket oSocket;
 
-                for(;;) {
+                while(true) {
+
+                    System.out.println("start 2000");
 
                     oSocket = oServerSocket.accept();
-                    String sInput;
 
-                    try (BufferedReader br = new BufferedReader(new InputStreamReader(oSocket.getInputStream()))) {
-                        sInput = br.readLine();
-                    }
+                    BufferedReader br = new BufferedReader(new InputStreamReader(oSocket.getInputStream()));
+                    String sInput = br.readLine();
+
+                    System.out.println("mid 2000");
 
                     int iId = Integer.parseInt(sInput);
 
-                    try (ObjectOutputStream oOutputStream = new ObjectOutputStream(oSocket.getOutputStream())) {
+                    ObjectOutputStream oOutputStream = new ObjectOutputStream(oSocket.getOutputStream());
                         oOutputStream.writeObject(hmMisure.get(iId));
-                    }
+
 
                     oSocket.close();
+
+                    System.out.println("end 2000");
                 }
 
             } catch (Exception oException) {
@@ -225,6 +230,8 @@ public class Server implements Runnable {
                 ServerSocket oServerSocket = new ServerSocket(4000);
 
                 while (true) {
+
+                    System.out.println("start 4000");
                     DatagramSocket oDatagramSocket = new DatagramSocket();
 
                     byte[] abInput = new byte[512];
@@ -244,6 +251,7 @@ public class Server implements Runnable {
                     hmMisure.put(iId, oMisura);
 
                     oDatagramSocket.close();
+                    System.out.println("end 4000");
                 }
 
             } catch (Exception oException) {

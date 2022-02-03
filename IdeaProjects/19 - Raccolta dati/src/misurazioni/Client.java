@@ -75,14 +75,17 @@ public class Client implements Runnable {
 
     private void simpleRequest(int iId) {
         try {
+            System.out.println("client id:" + iId);
+
             Socket oSocket = new Socket(oAddress,2000);
 
             PrintWriter oPrintWriter = new PrintWriter(oSocket.getOutputStream());
             oPrintWriter.println(iId);
-            oPrintWriter.close();
 
             ObjectInputStream oInputStream = new ObjectInputStream(oSocket.getInputStream());
             System.out.println(oInputStream.readObject().toString());
+
+            oInputStream.close();
 
             oSocket.close();
 
@@ -93,17 +96,22 @@ public class Client implements Runnable {
 
     private void complexRequest(int iId, long lTimeOne, long lTimeTwo) {
         try {
+
+            System.out.println("client id:" + iId + " address : " + oAddress.toString());
+
             Socket oSocket = new Socket(oAddress,3000);
 
             PrintWriter oPrintWriter = new PrintWriter(oSocket.getOutputStream());
-            oPrintWriter.println(iId +" "+ lTimeOne +" "+lTimeTwo);
 
-            oPrintWriter.close();
+            oPrintWriter.println(iId +" "+ lTimeOne +" "+lTimeTwo);
 
             ObjectInputStream oInputStream = new ObjectInputStream(oSocket.getInputStream());
             System.out.println(oInputStream.readObject());
 
+            oInputStream.close();
+
             oSocket.close();
+            System.out.println("client");
 
         } catch (Exception oException) {
             oException.printStackTrace();
