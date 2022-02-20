@@ -21,3 +21,7 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+*.uxf
+out/production/schoolProjects4/lampadina/Lampadina.png
+out/production/schoolProjects4/lampadina/Interruttore.png
+out/production/schoolProjects4/lampadina/Immagine 2020-12-27 170130.png
