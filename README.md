@@ -1,2 +1,2 @@
 # schoolProjects
- School exercises and projects
+A collection of small java projects / exercises
